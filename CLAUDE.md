@@ -62,7 +62,7 @@ PNG one-pager, and partner "Dyad Synthesis" via share links. No backend, no buil
 - **New feature module** → `js/features/x.js` exporting `xMethods = {…}`, import + add to `Object.assign` in `app.js`, add a row above.
 
 ## Repo
-GitHub `baobab-CABOY/KINKSYN-APP` (private), branch `main`. CI: `.github/workflows/ci.yml` (syntax check + smoke test).
-Hosted (private) as a claude.ai artifact: https://claude.ai/artifact/XviqpoQ5B2m27467vGqSe5
+GitHub `baobab-CABOY/KINKSYN-APP` (public), branch `main`. **Live: https://baobab-caboy.github.io/KINKSYN-APP/** (GitHub Pages from `main` root, auto-deploys on push). CI: `.github/workflows/ci.yml` (syntax check + smoke test).
+Also hosted (private) as a claude.ai artifact: https://claude.ai/artifact/XviqpoQ5B2m27467vGqSe5
 (slug `fa725d93-869f-400d-8ef1-6ba9de43c37a`). Republish with `publish_files` (slug + base_version) after changes.
 Artifact sandbox limits: PNG download is blocked and `#synapse=` URL links don't pass through; pasting a link into Dyad works.
