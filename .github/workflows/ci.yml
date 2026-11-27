@@ -9,6 +9,8 @@ jobs:
         with: { node-version: 22 }
       - name: Syntax check
         run: for f in $(find js -name '*.js'); do node --check "$f"; done
+      - name: Questionnaire docs up to date
+        run: node tools/gen-questionnaires.mjs && git diff --exit-code docs/questionnaires
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - name: Smoke test

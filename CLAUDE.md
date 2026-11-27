@@ -52,9 +52,10 @@ PNG one-pager, and partner "Dyad Synthesis" via share links. No backend, no buil
 | `js/views/insight-panel.js` (365) | `renderInsightPanel`: Guide & Scenes / Refine Live / Journal tabs |
 | `js/graph/engine.js` (527) | `class NeuralGraphEngine`: layout, physics float, pan/zoom/drag, hitTest, draw (edges, pulses, glows, partner rings, "mutual gold") |
 | `tests/smoke.py` | Playwright smoke test of every main flow |
+| `tools/gen-questionnaires.mjs` | Writes `docs/questionnaires/quick-pulse.md` + `full-deep-dive.md` from the data (generated, don't hand-edit) |
 
 ## Recipes
-- **Add/edit a question** → `js/data/questions.js` (`weights` keys must be node ids). Quick track? add id to `QUICK_PULSE_IDS`. Update demo answers in `quiz.js` if needed.
+- **Add/edit a question** → `js/data/questions.js` (`weights` keys must be node ids). Quick track? add id to `QUICK_PULSE_IDS`. Update demo answers in `quiz.js` if needed. Then `node tools/gen-questionnaires.mjs` (CI fails if `docs/questionnaires/` is stale).
 - **Add a node** → `js/data/nodes.js` (driver in `DRIVERS` or activity in `ACTIVITIES` with `drivers`), give it weight in ≥1 question, add it to each preset in `presets.js`. Graph layout is automatic (rings); check `engine.js buildGraphData` + `export-png.js drawMiniNeuralGraph` spacing.
 - **Change scoring** → `profile.js computeProfile` (+ `updateLiveNodeState` mapping). Hard Limit rules there.
 - **Change matching** → `dyad.js renderDyadSynthesisHTML` and the mutual-gold thresholds in `engine.js draw`.

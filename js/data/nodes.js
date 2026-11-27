@@ -1,6 +1,4 @@
 // Graph node content: Desire Core, 7 drivers, 10 activities (pathways). Pure data.
-import { app } from '../app.js';
-
 export const CORE_NODE = {
   id: 'core',
   label: 'Desire Core',
