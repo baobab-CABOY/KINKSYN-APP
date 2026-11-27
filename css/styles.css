@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html, body {
+  background-color: #08080c;
+  color: #f4f4f5;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #08080c;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+.glass-panel {
+  background: rgba(16, 16, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bg-grid-pattern {
+  background-image:
+    radial-gradient(circle at 50% 35%, rgba(168, 85, 247, 0.11), transparent 55%),
+    radial-gradient(circle at 80% 75%, rgba(99, 102, 241, 0.08), transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 34px 34px, 34px 34px;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 3.6s ease-in-out infinite;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-enter {
+  animation: fadeSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#neuralCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+#neuralCanvas:active {
+  cursor: grabbing;
+}

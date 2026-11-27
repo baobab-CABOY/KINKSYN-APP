@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>KINKY SYNAPSES // Desire & Polarity Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    if (window.tailwind) tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: {
+              bg: '#08080c',
+              panel: '#101016',
+              card: '#15151d',
+              border: 'rgba(255, 255, 255, 0.08)',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#08080c] text-zinc-100 min-h-screen flex flex-col selection:bg-purple-500/30 selection:text-purple-200">
+
+  <!-- Top Navigation Header -->
+  <header class="w-full border-b border-white/[0.08] bg-[#08080c]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-14 flex items-center justify-between gap-2">
+      <button type="button" onclick="app.goHome()" class="flex items-center gap-2 text-left group focus:outline-none shrink-0">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-500/25 via-indigo-500/20 to-teal-500/20 border border-purple-500/40 flex items-center justify-center group-hover:border-purple-400 transition">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_10px_#a855f7]"></span>
+        </div>
+        <div class="flex items-baseline">
+          <span class="font-mono font-semibold tracking-wider text-sm text-zinc-100">KINKY SYNAPSES</span>
+          <span class="hidden sm:inline font-mono text-[10px] text-teal-400 ml-1.5 px-1.5 py-0.5 rounded bg-teal-500/10 border border-teal-500/25">// DESIRE & POLARITY ENGINE</span>
+        </div>
+      </button>
+
+      <div id="headerControls" class="flex items-center gap-1.5 sm:gap-2">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Viewport -->
+  <main id="appRoot" class="flex-1 flex flex-col relative w-full">
+    <div class="flex-1 flex items-center justify-center p-6 text-center">
+      <div class="font-mono text-xs text-zinc-500">Initializing Neural Cartography & Vault...</div>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="fixed bottom-4 right-4 left-4 sm:left-auto z-50 flex flex-col items-center sm:items-end gap-2 pointer-events-none"></div>
+
+  <!-- Local-First Encrypted Vault & Time-Lapse Snapshots Modal -->
+  <div id="vaultModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md">
+    <div class="glass-panel rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl border border-white/10 max-h-[90vh] overflow-y-auto animate-enter">
+      <div class="flex items-start justify-between gap-4 pb-3.5 border-b border-white/[0.08]">
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-teal-400">Zero-Knowledge Device Storage · AES-256-GCM</span>
+          <h3 class="text-base sm:text-lg font-semibold text-white mt-0.5">KINKY SYNAPSES — Local Privacy Vault</h3>
+        </div>
+        <button type="button" onclick="app.closeModal('vaultModal')" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div id="vaultModalBody" class="space-y-4 mt-4">
+        <!-- Populated dynamically by app.renderVaultModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Ethical Philosophy & Sustainable Model Modal -->
+  <div id="ethicsModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3.5 sm:p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-panel rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl border border-white/10 max-h-[90vh] overflow-y-auto animate-enter">
+      <div class="flex items-start justify-between gap-4 pb-3.5 border-b border-white/[0.08]">
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-teal-400">Whole-Person Charter & Ethical Architecture</span>
+          <h3 class="text-base sm:text-lg font-semibold text-white mt-0.5">Why SYNAPSE Exists & How We Sustain It</h3>
+        </div>
+        <button type="button" onclick="app.closeModal('ethicsModal')" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="space-y-4 mt-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+        <div class="p-3.5 rounded-xl bg-teal-500/[0.07] border border-teal-500/25 space-y-1.5">
+          <div class="font-mono text-[11px] uppercase tracking-wider text-teal-300">01 // Whole-Person & Nervous-System Lens</div>
+          <p class="text-xs text-zinc-200">
+            Desire does not live in a vacuum—it lives in a nervous system shaped by stress, attachment history, daily cognitive load, and relational safety. KINKY SYNAPSES treats kink not as a transactional checklist of acts, but as an expressive language for rest, somatic presence, play, and mutual attunement.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+          <div class="p-3 rounded-xl bg-black/45 border border-white/[0.07]">
+            <div class="font-mono text-[10px] text-purple-300 uppercase mb-1">SSC / RACK / PRICK</div>
+            <p class="text-[11px] text-zinc-400">Safe, Sane & Consensual; Risk-Aware Consensual Kink; Personal Responsibility, Informed Consensual Kink.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-black/45 border border-white/[0.07]">
+            <div class="font-mono text-[10px] text-amber-300 uppercase mb-1">Fantasy ≠ Mandate</div>
+            <p class="text-[11px] text-zinc-400">Separating imagination from embodied desire prevents pressure, shame, and miscommunication.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-black/45 border border-white/[0.07]">
+            <div class="font-mono text-[10px] text-rose-300 uppercase mb-1">Hard Limits Are Sacred</div>
+            <p class="text-[11px] text-zinc-400">In Dyad Synthesis, any hard limit on either side automatically filters out that pathway without judgment.</p>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-white/[0.08] space-y-2.5">
+          <div class="font-mono text-[11px] uppercase tracking-wider text-indigo-300">02 // Ethical Monetization Blueprint (Zero Consent Paywalls)</div>
+          <p class="text-xs text-zinc-400">
+            Core self-discovery, local encrypted storage, 1-on-1 partner matching, and one-pager exports remain <strong class="text-zinc-200">100% free with zero data harvesting</strong>. Optional sustainability pillars:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.07] flex items-start justify-between gap-3">
+              <div>
+                <div class="font-medium text-zinc-100">KINKY SYNAPSES Sanctuary Pass (Optional Supporter Tier)</div>
+                <div class="text-[11px] text-zinc-400 mt-0.5">Multi-partner polycule constellation maps (3+ profiles), E2EE negotiation rooms, and printable protocol decks.</div>
+              </div>
+              <span class="font-mono text-[10px] px-2 py-1 rounded bg-purple-500/20 text-purple-300 shrink-0">$6 / mo</span>
+            </div>
+            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.07] flex items-start justify-between gap-3">
+              <div>
+                <div class="font-medium text-zinc-100">Vetted Somatic & Kink-Affirming Therapist Directory</div>
+                <div class="text-[11px] text-zinc-400 mt-0.5">Optional referrals to licensed AASECT sex therapists and somatic educators for couples navigating edge or attachment work.</div>
+              </div>
+              <span class="font-mono text-[10px] px-2 py-1 rounded bg-teal-500/20 text-teal-300 shrink-0">Practitioner Guild</span>
+            </div>
+            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.07] flex items-start justify-between gap-3">
+              <div>
+                <div class="font-medium text-zinc-100">Body-Safe Artisan & Literature Curation</div>
+                <div class="text-[11px] text-zinc-400 mt-0.5">Transparent affiliate support on vetted educational books and medical-grade/body-safe starter kits.</div>
+              </div>
+              <span class="font-mono text-[10px] px-2 py-1 rounded bg-amber-500/20 text-amber-300 shrink-0">Curated</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- One-Pager PNG Export Preview Modal -->
+  <div id="pngModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md">
+    <div class="glass-panel rounded-2xl max-w-3xl w-full p-4 sm:p-6 shadow-2xl border border-white/10 max-h-[92vh] flex flex-col animate-enter">
+      <div class="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.08] shrink-0">
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-purple-400">KINKY SYNAPSES // DESIRE & POLARITY ENGINE</span>
+          <h3 class="text-base sm:text-lg font-semibold text-white mt-0.5">One-Pager Desire Blueprint (PNG)</h3>
+        </div>
+        <button type="button" onclick="app.closeModal('pngModal')" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 my-3 shrink-0">
+        <input id="posterNameInput" type="text" maxlength="28" placeholder="Optional Name / Alias on Poster (e.g., Maya)" oninput="app.renderOnePagerCanvas()" class="flex-1 bg-black/60 border border-white/10 rounded-xl px-3.5 py-2 font-mono text-xs text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-purple-500/50" />
+        <button type="button" onclick="app.downloadOnePagerPng()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-mono font-semibold shadow-lg transition flex items-center justify-center gap-2 shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Save PNG to Device</span>
+        </button>
+      </div>
+
+      <p class="text-[11px] font-mono text-zinc-400 mb-2.5 shrink-0">
+        Includes all 3 neural lenses (Overlay, Receiving, Giving), ranked drivers & pathways with definitions, nervous-system baseline, and boundaries.
+      </p>
+
+      <div class="flex-1 overflow-y-auto rounded-xl border border-white/10 bg-black/70 p-2 flex justify-center items-start">
+        <img id="pngPreviewImg" alt="SYNAPSE One-Pager Desire Blueprint" class="max-w-full h-auto rounded-lg shadow-2xl" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Dyad Synthesis & Scoped Profile Linking Studio Modal -->
+  <div id="shareModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md">
+    <div class="glass-panel rounded-2xl max-w-4xl w-full p-4 sm:p-6 shadow-2xl border border-white/10 max-h-[92vh] overflow-y-auto animate-enter">
+      <div class="flex items-start justify-between gap-4 pb-3.5 border-b border-white/[0.08]">
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-amber-400">Consensual Dyad Synthesis & Scoped Sharing</span>
+          <h3 class="text-base sm:text-xl font-semibold text-white mt-0.5">Link Profiles & Co-Create Exploration</h3>
+        </div>
+        <button type="button" onclick="app.closeShareModal()" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="space-y-5 mt-4">
+        <!-- Step 1 & 2 Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- 1. Scoped Share Signature -->
+          <div class="p-3.5 rounded-xl bg-black/45 border border-white/[0.08] space-y-2.5">
+            <div class="flex items-center justify-between">
+              <label class="text-[11px] font-mono uppercase tracking-wider text-purple-300">1. Scoped Share Signature</label>
+              <span class="font-mono text-[10px] text-zinc-500">Zero Server</span>
+            </div>
+
+            <!-- Scope Selector Pills -->
+            <div class="grid grid-cols-2 gap-1.5">
+              <button type="button" id="scopeBtn-full" onclick="app.setShareScope('full')" class="px-2.5 py-1.5 rounded-lg border border-purple-500/60 bg-purple-500/20 text-[11px] font-mono text-purple-100 text-left transition">
+                <div class="font-semibold">Full 18-Node Map</div>
+                <div class="text-[9px] opacity-80">For deep partner synthesis</div>
+              </button>
+              <button type="button" id="scopeBtn-vibe" onclick="app.setShareScope('vibe')" class="px-2.5 py-1.5 rounded-lg border border-white/10 bg-white/[0.03] text-[11px] font-mono text-zinc-400 text-left transition">
+                <div class="font-semibold">First-Date Vibe Card</div>
+                <div class="text-[9px] opacity-80">Top 3 Drivers + Hard Limits</div>
+              </button>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input id="shareCodeInput" type="text" readonly class="flex-1 bg-black/70 border border-white/10 rounded-xl px-3 py-2 font-mono text-[11px] text-purple-300 focus:outline-none" />
+              <button type="button" onclick="app.copyShareLink()" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-mono font-medium transition shrink-0">
+                Copy Link
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Link Partner Profile & Saved Roster -->
+          <div class="p-3.5 rounded-xl bg-black/45 border border-white/[0.08] space-y-2.5">
+            <div class="flex items-center justify-between">
+              <label class="text-[11px] font-mono uppercase tracking-wider text-cyan-300">2. Link Partner / Saved Roster</label>
+              <span id="partnerStatusBadge" class="font-mono text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">Not Linked</span>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input id="partnerNameCustomInput" type="text" maxlength="20" placeholder="Alias (optional)" class="sm:w-28 bg-black/70 border border-white/10 rounded-xl px-2.5 py-2 font-mono text-[11px] text-zinc-100 placeholder:text-zinc-600 focus:outline-none" />
+              <input id="partnerCodeInput" type="text" placeholder="Paste #synapse= link or JSON..." class="flex-1 bg-black/70 border border-white/10 rounded-xl px-3 py-2 font-mono text-[11px] text-cyan-300 placeholder:text-zinc-600 focus:outline-none focus:border-cyan-500/50" />
+              <button type="button" onclick="app.applyPartnerCode()" class="px-3 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-200 text-xs font-mono font-medium transition shrink-0">
+                Link
+              </button>
+            </div>
+
+            <!-- Saved Partner Roster + Built-In Archetypes -->
+            <div class="pt-1 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-400">Saved Roster & Sample Archetypes:</span>
+                <button type="button" id="clearPartnerBtn" onclick="app.clearPartnerProfile()" class="hidden text-[10px] font-mono text-rose-400 hover:underline">Clear Active</button>
+              </div>
+              <div id="partnerRosterGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+                <!-- Populated dynamically with saved roster + Alex/Sam/River -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Comprehensive Dyad Synthesis Report -->
+        <div id="dyadSynthesisContainer" class="pt-4 border-t border-white/[0.08] space-y-4">
+          <!-- Populated dynamically by app.renderDyadSynthesisHTML() -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
