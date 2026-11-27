@@ -1,4 +1,4 @@
-# KINKSYN — Kinky Synapses // Desire & Polarity Engine
+# KINKSYS (formerly KINKSYN) // Desire & Polarity Engine
 
 Local-first web app for adults to map *why* they desire what they desire: a 10- or 24-scenario quiz becomes an
 interactive 18-node neural graph (7 psychological drivers, 10 erotic pathways) with Receiving / Giving / Overlay

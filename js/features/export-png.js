@@ -52,7 +52,7 @@ export const exportPngMethods = {
 
     ctx.fillStyle = '#c084fc';
     ctx.font = '600 16px "JetBrains Mono", monospace';
-    ctx.fillText('KINKY SYNAPSES // DESIRE & POLARITY ENGINE', 68, 86);
+    ctx.fillText('KINKSYS // DESIRE & POLARITY ENGINE', 68, 86);
 
     ctx.fillStyle = '#ffffff';
     ctx.font = '700 38px "Inter", sans-serif';
@@ -288,7 +288,7 @@ export const exportPngMethods = {
 
     ctx.fillStyle = '#71717a';
     ctx.font = '500 13px "JetBrains Mono", monospace';
-    ctx.fillText('KINKY SYNAPSES // DESIRE & POLARITY ENGINE — Enthusiastic Consent · Nervous-System Safety · Self-Knowledge', 68, H - 48);
+    ctx.fillText('KINKSYS // DESIRE & POLARITY ENGINE — Enthusiastic Consent · Nervous-System Safety · Self-Knowledge', 68, H - 48);
 
     this.lastPosterDataUrl = offCanvas.toDataURL('image/png');
     const previewImg = document.getElementById('pngPreviewImg');
@@ -423,7 +423,7 @@ export const exportPngMethods = {
   downloadOnePagerPng() {
     if (!this.lastPosterDataUrl) this.renderOnePagerCanvas();
     const link = document.createElement('a');
-    link.download = `SYNAPSE-Desire-Blueprint-${Date.now()}.png`;
+    link.download = `KINKSYS-Desire-Blueprint-${Date.now()}.png`;
     link.href = this.lastPosterDataUrl;
     document.body.appendChild(link);
     link.click();

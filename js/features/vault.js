@@ -148,7 +148,7 @@ export const vaultMethods = {
         <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-3">
           <div class="font-mono text-xs text-amber-300 uppercase">Vault Locked (AES-256-GCM Encrypted)</div>
           <p class="text-xs text-zinc-300 leading-relaxed">
-            An encrypted SYNAPSE profile, experience journal, and snapshot history is stored locally on this device. Enter your passphrase to decrypt it in memory.
+            An encrypted KINKSYS profile, experience journal, and snapshot history is stored locally on this device. Enter your passphrase to decrypt it in memory.
           </p>
           <div class="flex flex-col sm:flex-row gap-2">
             <input id="unlockVaultInput" type="password" placeholder="Enter vault passphrase..." class="flex-1 bg-black/70 border border-white/15 rounded-xl px-3.5 py-2.5 font-mono text-xs text-white focus:outline-none focus:border-teal-400" />

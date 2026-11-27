@@ -63,12 +63,12 @@ export const dyadMethods = {
     const input = document.getElementById('partnerCodeInput');
     const aliasInput = document.getElementById('partnerNameCustomInput');
     if (!input || !input.value.trim()) {
-      this.showToast('Paste a partner KINKY SYNAPSES link or code first');
+      this.showToast('Paste a partner KINKSYS link or code first');
       return;
     }
     const decoded = this.decodeProfile(input.value);
     if (!decoded) {
-      this.showToast('Invalid KINKY SYNAPSES signature format');
+      this.showToast('Invalid KINKSYS signature format');
       return;
     }
     const customAlias = aliasInput && aliasInput.value.trim() ? aliasInput.value.trim() : `Partner #${this.savedPartners.length + 1}`;
@@ -172,7 +172,7 @@ export const dyadMethods = {
         <div class="p-6 rounded-2xl bg-white/[0.02] border border-dashed border-white/15 text-center space-y-2.5">
           <div class="font-mono text-xs text-amber-400 uppercase tracking-wider">Awaiting Partner Signature</div>
           <p class="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
-            Paste a partner's SYNAPSE link above—or select <strong class="text-zinc-200">Alex</strong>, <strong class="text-zinc-200">Sam</strong>, or <strong class="text-zinc-200">River</strong>—to automatically extract common traits, filter out hard limits, and generate tailored scenes, readings, and starter tools together.
+            Paste a partner's KINKSYS link above—or select <strong class="text-zinc-200">Alex</strong>, <strong class="text-zinc-200">Sam</strong>, or <strong class="text-zinc-200">River</strong>—to automatically extract common traits, filter out hard limits, and generate tailored scenes, readings, and starter tools together.
           </p>
         </div>
       `;

@@ -1,6 +1,6 @@
-# KINKSYN — context map for Claude
+# KINKSYS — context map for Claude
 
-Local-first, adult self-discovery web app ("KINKY SYNAPSES // Desire & Polarity Engine").
+Local-first, adult self-discovery web app ("KINKSYS // Desire & Polarity Engine").
 A quiz maps answers onto an 18-node graph (1 core + 7 psychological drivers + 10 erotic pathways),
 viewable through Receiving / Giving / Overlay lenses, with an encrypted local vault, journal,
 PNG one-pager, and partner "Dyad Synthesis" via share links. No backend, no build step.
@@ -29,6 +29,7 @@ PNG one-pager, and partner "Dyad Synthesis" via share links. No backend, no buil
 | File | What lives there |
 |---|---|
 | `index.html` (264) | Head, Tailwind config, header shell, 4 static modals (vault, ethics/charter, PNG, share/dyad) |
+| `assets/` | `logo.png` (512px, transparent, light lavender for dark UI), `favicon.png` |
 | `css/styles.css` (70) | Scrollbars, glass panel, grid bg, animations, canvas cursor |
 | `js/main.js` (23) | Sets `window.app`, boots `app.init()` |
 | `js/app.js` (50) | **State fields** + mixin assembly. Add new state/mixins here |

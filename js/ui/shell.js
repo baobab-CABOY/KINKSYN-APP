@@ -15,7 +15,7 @@ export const shellMethods = {
             this.selectedNodeId = sortedDrivers[0] || 'surrender';
             this.view = 'graph';
             this.render();
-            this.showToast('Loaded shared SYNAPSE neural map');
+            this.showToast('Loaded shared KINKSYS neural map');
             return;
           } else {
             this.partnerProfile = decoded;

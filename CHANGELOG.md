@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 — 2026-11-27
+- Renamed to **KINKSYS** (display name only; `#synapse=` links and saved vaults still work).
+- New logo on the landing page and header, plus favicon (`assets/`).
+
 ## 0.2.0 — 2026-11-27
 Restructured from the single-file prototype (`kinksyn_v0.1`, kept in `archive/`).
 

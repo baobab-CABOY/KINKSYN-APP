@@ -6,13 +6,11 @@ export const landingView = {
     return `
       <div class="flex-1 bg-grid-pattern flex flex-col items-center justify-center px-4 py-8 sm:py-12">
         <div class="max-w-3xl w-full text-center space-y-6 animate-enter">
-          <div class="mx-auto w-16 h-16 rounded-2xl glass-panel border border-purple-500/40 flex items-center justify-center shadow-[0_0_40px_rgba(168,85,247,0.28)] animate-pulse-glow">
-            <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-teal-400 via-purple-400 to-rose-400 shadow-[0_0_20px_#c084fc]"></div>
-          </div>
+          <img src="assets/logo.png" alt="KINKSYS logo" class="mx-auto w-36 h-36 sm:w-44 sm:h-44 animate-pulse-glow drop-shadow-[0_0_28px_rgba(168,85,247,0.45)]" />
 
           <div class="space-y-3">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border border-teal-500/30 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-teal-300">
-              <span>KINKY SYNAPSES // DESIRE & POLARITY ENGINE</span>
+              <span>KINKSYS // DESIRE & POLARITY ENGINE</span>
             </div>
             <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
               Understand <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-purple-400 to-rose-400">Why</span> You Desire,<br class="hidden sm:inline" /> And Map How You Connect.
