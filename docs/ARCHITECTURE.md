@@ -61,3 +61,36 @@ AES-GCM envelope (`PBKDF2-SHA256, 100k iterations, 16-byte salt, 12-byte IV`). P
 Rings: core at 0, drivers radius 132, activities radius ~242 ±15 (alternating). Node radius grows with effective
 score for the active lens. Filter `active` = effective ≥ 25, `fantasy` = primarily fantasy. Lit threshold 25.
 Overlay colour: both rec & give ≥ 35 → fuchsia "dual"; give-leaning → rose; receive-leaning → indigo.
+
+## Beta model v1 — parallel profile schema
+
+The beta questionnaire package lives in `js/data/questionnaire-beta-v1.json`. It defines:
+- 11 broad taxonomy domains and 36 concept nodes (concepts can belong to multiple domains).
+- Snapshot and modular Deep Map question content.
+- Multi-select relationship states, direction preferences and optional context fields.
+- An optional highly sensitive boundaries notebook, private by default.
+
+This model is intentionally separate from the legacy `app.profile.nodes[*].score` model. Do not convert beta answers into the legacy 0–100 score or pass them into legacy archetypes/Dyad matching. Use a separate versioned beta response collection (e.g. `betaProfiles`) and add it to the vault with backwards-compatible defaults. Existing vaults and `#synapse=` share links must continue to work.
+
+Suggested concept response record:
+```json
+{
+  "concept_id": "ACT_POWER_EXCHANGE",
+  "relationship_states": ["curious", "fantasy_only"],
+  "action_directions": ["receiving"],
+  "time_context": "unspecified",
+  "experience": "not_answered",
+  "enjoyment": null,
+  "conditions": [],
+  "note": null,
+  "boundary": {
+    "status": "not_disclosed",
+    "details": null,
+    "shareable": false
+  },
+  "item_version": "1.0",
+  "updated_at": null
+}
+```
+
+Important: unanswered is not the same as `not_interested`; relationship states are not an ordinal scale. Boundary details must be isolated from graph nodes, exports and Dyad/share data. See `docs/beta/NEURAL_NODE_MAP_SPEC.md` for graph semantics and `docs/beta/BETA_IMPLEMENTATION_BRIEF.md` for acceptance criteria.

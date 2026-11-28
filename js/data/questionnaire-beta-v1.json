@@ -1,0 +1,963 @@
+{
+  "schema_version": "1.0.0",
+  "release_status": "beta_proposal",
+  "disclaimer": "Adults 18+. Self-reflection only; not validated, diagnostic, a consent signal, or a compatibility score.",
+  "relationship_state_options": [
+    {
+      "id": "curious",
+      "label": "Curious"
+    },
+    {
+      "id": "fantasy_only",
+      "label": "Fantasy / imagination"
+    },
+    {
+      "id": "appealing",
+      "label": "Appealing to me"
+    },
+    {
+      "id": "want_to_explore",
+      "label": "Would like to explore"
+    },
+    {
+      "id": "open_under_conditions",
+      "label": "Open under certain conditions"
+    },
+    {
+      "id": "tried_before",
+      "label": "Tried before"
+    },
+    {
+      "id": "currently_practice",
+      "label": "Currently practice"
+    },
+    {
+      "id": "enjoy_or_would_choose_again",
+      "label": "Enjoy / would choose again"
+    },
+    {
+      "id": "not_interested",
+      "label": "Not interested"
+    },
+    {
+      "id": "unfamiliar",
+      "label": "Unfamiliar to me"
+    },
+    {
+      "id": "unsure",
+      "label": "Not sure"
+    },
+    {
+      "id": "prefer_not_to_answer",
+      "label": "Prefer not to answer"
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "doing_or_giving",
+      "label": "Doing / giving"
+    },
+    {
+      "id": "receiving",
+      "label": "Receiving"
+    },
+    {
+      "id": "observing",
+      "label": "Observing"
+    },
+    {
+      "id": "being_observed",
+      "label": "Being observed"
+    },
+    {
+      "id": "co_creating",
+      "label": "Co-creating together"
+    },
+    {
+      "id": "flexible_or_depends",
+      "label": "Flexible / depends"
+    },
+    {
+      "id": "not_sure",
+      "label": "Not sure"
+    }
+  ],
+  "domains": [
+    {
+      "id": "DOM_POWER_EXCHANGE",
+      "label": "Power, authority & exchange",
+      "description": "Dynamics involving negotiated authority, control, service or surrender."
+    },
+    {
+      "id": "DOM_SENSATION_IMPACT",
+      "label": "Sensation & impact",
+      "description": "Experiences centered on physical sensation, intensity, rhythm or impact."
+    },
+    {
+      "id": "DOM_BONDAGE_RESTRAINT",
+      "label": "Bondage & restriction",
+      "description": "Negotiated restraint, immobilization and restricted movement."
+    },
+    {
+      "id": "DOM_ROLEPLAY_PERSONA",
+      "label": "Role-play & persona",
+      "description": "Characters, scenarios, roles and imaginative framing."
+    },
+    {
+      "id": "DOM_FETISH_SENSORY",
+      "label": "Fetish & sensory focus",
+      "description": "Objects, materials, body features or sensory themes with personal significance."
+    },
+    {
+      "id": "DOM_OBSERVATION_PERFORMANCE",
+      "label": "Observation & performance",
+      "description": "Being seen, watching, display and consensual performance."
+    },
+    {
+      "id": "DOM_PSYCHOLOGICAL_EMOTIONAL",
+      "label": "Psychological & emotional experience",
+      "description": "Anticipation, ritual, vulnerability, intensity, trust and headspace."
+    },
+    {
+      "id": "DOM_EROTIC_INTIMACY",
+      "label": "Erotic & intimate activities",
+      "description": "Intimate activities and erotic contexts, described at a level chosen by the user."
+    },
+    {
+      "id": "DOM_LIFESTYLE_RELATIONSHIPS",
+      "label": "Lifestyle & relationship structures",
+      "description": "Relationship agreements, ongoing dynamics and lifestyle practices."
+    },
+    {
+      "id": "DOM_COMMUNITY_SOCIAL",
+      "label": "Community & social participation",
+      "description": "Learning, events, community, social connection and shared culture."
+    },
+    {
+      "id": "DOM_COMMUNICATION_CARE",
+      "label": "Communication, negotiation & care",
+      "description": "Communication, boundaries, check-ins, aftercare and repair."
+    }
+  ],
+  "concepts": [
+    {
+      "id": "ACT_POWER_EXCHANGE",
+      "label": "Power exchange",
+      "domain_ids": [
+        "DOM_POWER_EXCHANGE",
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_DOMINANCE",
+      "label": "Dominant / leading role",
+      "domain_ids": [
+        "DOM_POWER_EXCHANGE",
+        "DOM_ROLEPLAY_PERSONA"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_SUBMISSION",
+      "label": "Submissive / yielding role",
+      "domain_ids": [
+        "DOM_POWER_EXCHANGE",
+        "DOM_ROLEPLAY_PERSONA"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_SERVICE",
+      "label": "Service and acts of service",
+      "domain_ids": [
+        "DOM_POWER_EXCHANGE",
+        "DOM_LIFESTYLE_RELATIONSHIPS"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_PROTOCOL_RITUAL",
+      "label": "Protocols, rituals and structure",
+      "domain_ids": [
+        "DOM_POWER_EXCHANGE",
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_SENSATION_PLAY",
+      "label": "Sensation play",
+      "domain_ids": [
+        "DOM_SENSATION_IMPACT",
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_IMPACT_PLAY",
+      "label": "Impact play",
+      "domain_ids": [
+        "DOM_SENSATION_IMPACT"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_TEMPERATURE_PLAY",
+      "label": "Temperature-based sensation",
+      "domain_ids": [
+        "DOM_SENSATION_IMPACT",
+        "DOM_FETISH_SENSORY"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_TICKLING",
+      "label": "Tickling and playful sensation",
+      "domain_ids": [
+        "DOM_SENSATION_IMPACT",
+        "DOM_ROLEPLAY_PERSONA"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_BONDAGE_RESTRAINT",
+      "label": "Bondage and restraint",
+      "domain_ids": [
+        "DOM_BONDAGE_RESTRAINT",
+        "DOM_POWER_EXCHANGE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_POSITIONAL_RESTRAINT",
+      "label": "Positioning and restricted movement",
+      "domain_ids": [
+        "DOM_BONDAGE_RESTRAINT"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_BLINDFOLD_SENSORY",
+      "label": "Sensory reduction / blindfolds",
+      "domain_ids": [
+        "DOM_BONDAGE_RESTRAINT",
+        "DOM_SENSATION_IMPACT"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_ROLEPLAY",
+      "label": "Role-play and scenarios",
+      "domain_ids": [
+        "DOM_ROLEPLAY_PERSONA",
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_CHARACTER_PERSONA",
+      "label": "Character or persona exploration",
+      "domain_ids": [
+        "DOM_ROLEPLAY_PERSONA"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_UNIFORMS_COSTUME",
+      "label": "Costumes, uniforms and visual roles",
+      "domain_ids": [
+        "DOM_ROLEPLAY_PERSONA",
+        "DOM_FETISH_SENSORY"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_FETISH_OBJECTS",
+      "label": "Object or material-focused interests",
+      "domain_ids": [
+        "DOM_FETISH_SENSORY"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_FABRICS_TEXTURES",
+      "label": "Fabrics, textures and tactile focus",
+      "domain_ids": [
+        "DOM_FETISH_SENSORY",
+        "DOM_SENSATION_IMPACT"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_FOOTWEAR_CLOTHING",
+      "label": "Clothing or footwear-focused interests",
+      "domain_ids": [
+        "DOM_FETISH_SENSORY"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_VOYEURISM_CONSENSUAL",
+      "label": "Consensual watching",
+      "domain_ids": [
+        "DOM_OBSERVATION_PERFORMANCE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_EXHIBITIONISM_CONSENSUAL",
+      "label": "Consensual being watched / display",
+      "domain_ids": [
+        "DOM_OBSERVATION_PERFORMANCE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_PERFORMANCE",
+      "label": "Erotic or theatrical performance",
+      "domain_ids": [
+        "DOM_OBSERVATION_PERFORMANCE",
+        "DOM_ROLEPLAY_PERSONA"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_ANTICIPATION",
+      "label": "Anticipation and suspense",
+      "domain_ids": [
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_TRUST_VULNERABILITY",
+      "label": "Trust and chosen vulnerability",
+      "domain_ids": [
+        "DOM_PSYCHOLOGICAL_EMOTIONAL",
+        "DOM_COMMUNICATION_CARE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_HEADSPACE",
+      "label": "Immersive headspace or altered focus",
+      "domain_ids": [
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_EDGING_PACING",
+      "label": "Pacing, teasing and anticipation",
+      "domain_ids": [
+        "DOM_EROTIC_INTIMACY",
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_EROTIC_TOUCH",
+      "label": "Erotic touch and sensation",
+      "domain_ids": [
+        "DOM_EROTIC_INTIMACY",
+        "DOM_SENSATION_IMPACT"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_INTIMACY_AFTERCARE",
+      "label": "Intimacy and aftercare",
+      "domain_ids": [
+        "DOM_EROTIC_INTIMACY",
+        "DOM_COMMUNICATION_CARE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_DDLG_AGEPLAY_ADULT",
+      "label": "Consensual adult age-role / caregiving role-play",
+      "domain_ids": [
+        "DOM_ROLEPLAY_PERSONA",
+        "DOM_POWER_EXCHANGE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_PET_PLAY_ADULT",
+      "label": "Consensual adult animal-role / pet play",
+      "domain_ids": [
+        "DOM_ROLEPLAY_PERSONA",
+        "DOM_POWER_EXCHANGE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_RELATIONSHIP_AGREEMENTS",
+      "label": "Negotiated relationship agreements",
+      "domain_ids": [
+        "DOM_LIFESTYLE_RELATIONSHIPS",
+        "DOM_COMMUNICATION_CARE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_ONGOING_DYNAMICS",
+      "label": "Ongoing negotiated dynamics",
+      "domain_ids": [
+        "DOM_LIFESTYLE_RELATIONSHIPS",
+        "DOM_POWER_EXCHANGE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_EVENTS_COMMUNITY",
+      "label": "Events and community participation",
+      "domain_ids": [
+        "DOM_COMMUNITY_SOCIAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_EDUCATION_SKILL",
+      "label": "Learning, workshops and skill-building",
+      "domain_ids": [
+        "DOM_COMMUNITY_SOCIAL",
+        "DOM_COMMUNICATION_CARE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_NEGOTIATION",
+      "label": "Negotiation and check-ins",
+      "domain_ids": [
+        "DOM_COMMUNICATION_CARE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_BOUNDARIES",
+      "label": "Boundary reflection and communication",
+      "domain_ids": [
+        "DOM_COMMUNICATION_CARE"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    },
+    {
+      "id": "ACT_AFTERCARE_REPAIR",
+      "label": "Aftercare and repair conversations",
+      "domain_ids": [
+        "DOM_COMMUNICATION_CARE",
+        "DOM_PSYCHOLOGICAL_EMOTIONAL"
+      ],
+      "description": "Neutral beta label. Expand with reviewed definition before production.",
+      "status": "beta_draft"
+    }
+  ],
+  "questionnaires": {
+    "snapshot": {
+      "id": "KQ_SNAPSHOT_V1",
+      "title": "KINKSYN Snapshot",
+      "estimated_minutes": 5,
+      "questions": [
+        {
+          "id": "SNAP_01",
+          "type": "multi_select",
+          "prompt": "What brings you here today?",
+          "options": [
+            "Understand myself",
+            "Find words for interests",
+            "Explore curiosity",
+            "Prepare to communicate with someone",
+            "Learn about the community",
+            "Explore connection",
+            "Just looking"
+          ],
+          "required": false
+        },
+        {
+          "id": "SNAP_02",
+          "type": "single_select",
+          "prompt": "How familiar are you with kink and BDSM language?",
+          "options": [
+            "I'm new to it",
+            "I know a few terms",
+            "I'm fairly familiar",
+            "I'm very familiar",
+            "Prefer not to say"
+          ],
+          "required": false
+        },
+        {
+          "id": "SNAP_03",
+          "type": "optional_text",
+          "prompt": "Do you use any words or labels for yourself?",
+          "options": [
+            "I don't use a label",
+            "I'm not sure",
+            "I'd like to write my own"
+          ],
+          "required": false
+        },
+        {
+          "id": "SNAP_04",
+          "type": "multi_select",
+          "prompt": "Which areas would you like to see on your map?",
+          "source": "domains",
+          "required": false
+        },
+        {
+          "id": "SNAP_05",
+          "type": "per_selected_domain_states",
+          "prompt": "How do you relate to each area you selected?",
+          "source": "relationship_state_options",
+          "multi_select": true,
+          "required": false
+        },
+        {
+          "id": "SNAP_06",
+          "type": "multi_select",
+          "prompt": "Are there ways of participating that tend to interest you?",
+          "source": "direction_options",
+          "required": false
+        },
+        {
+          "id": "SNAP_07",
+          "type": "multi_select",
+          "prompt": "What can make an experience meaningful or appealing to you?",
+          "options": [
+            "Sensation",
+            "Playfulness",
+            "Trust and connection",
+            "Power dynamics",
+            "Ritual or structure",
+            "Aesthetics or materials",
+            "Emotional intensity",
+            "Curiosity and learning",
+            "Community",
+            "Something else",
+            "Not sure"
+          ],
+          "required": false
+        },
+        {
+          "id": "SNAP_08",
+          "type": "single_select",
+          "prompt": "What would you like to do next?",
+          "options": [
+            "Explore my map",
+            "Learn vocabulary",
+            "Complete the Deep Map",
+            "Reflect privately",
+            "Prepare a conversation",
+            "Explore community",
+            "Stop here for now"
+          ],
+          "required": false
+        },
+        {
+          "id": "SNAP_09",
+          "type": "review",
+          "prompt": "Review your answers. You can change or skip anything.",
+          "required": false
+        }
+      ]
+    },
+    "deep_map": {
+      "id": "KQ_DEEP_V1",
+      "title": "KINKSYN Deep Map",
+      "estimated_minutes": 20,
+      "modular": true,
+      "modules": [
+        {
+          "id": "DEEP_A",
+          "title": "Self-description and meaning",
+          "questions": [
+            {
+              "id": "DEEP_A1",
+              "type": "multi_select",
+              "prompt": "Which descriptions, if any, feel relevant to your relationship with kink?",
+              "options": [
+                "Part of my identity",
+                "A set of interests",
+                "A private fantasy life",
+                "A way to connect with others",
+                "A community or culture I'm part of",
+                "Something I'm exploring",
+                "None of these",
+                "I prefer my own words"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_A2",
+              "type": "single_select",
+              "prompt": "How do your interests tend to change over time?",
+              "options": [
+                "Mostly stable",
+                "They evolve gradually",
+                "They change with context or relationships",
+                "I'm still discovering them",
+                "Not sure"
+              ],
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "DEEP_B",
+          "title": "Activity and concept map",
+          "description": "Answer only the concepts you want. Each concept can have multiple relationship states.",
+          "question_template": {
+            "id": "DEEP_ACTIVITY_TEMPLATE",
+            "type": "concept_response",
+            "concept_source": "concepts",
+            "fields": [
+              "relationship_states",
+              "action_directions",
+              "time_context",
+              "experience",
+              "enjoyment",
+              "conditions"
+            ],
+            "required": false
+          }
+        },
+        {
+          "id": "DEEP_C",
+          "title": "Fantasy, curiosity and desire",
+          "questions": [
+            {
+              "id": "DEEP_C1",
+              "type": "single_select",
+              "prompt": "When something interests you in fantasy, how often does that translate into real-life exploration?",
+              "options": [
+                "Often",
+                "Sometimes",
+                "Rarely",
+                "It depends on the person or context",
+                "I prefer fantasy to remain fantasy",
+                "Not sure"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_C2",
+              "type": "multi_select",
+              "prompt": "What helps you decide whether to explore something in real life?",
+              "options": [
+                "Learning more",
+                "Talking it through",
+                "Trust with the people involved",
+                "Starting gently",
+                "Understanding risks and practicalities",
+                "Time to reflect",
+                "I don't want to translate every fantasy into action",
+                "Other"
+              ],
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "DEEP_D",
+          "title": "Roles and direction",
+          "questions": [
+            {
+              "id": "DEEP_D1",
+              "type": "multi_select",
+              "prompt": "Which role descriptions, if any, do you find useful for yourself?",
+              "options": [
+                "Dominant",
+                "Submissive",
+                "Switch",
+                "Top",
+                "Bottom",
+                "Sadist",
+                "Masochist",
+                "Service-oriented",
+                "Observer",
+                "Performer",
+                "Other words",
+                "No labels",
+                "Not sure"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_D2",
+              "type": "single_select",
+              "prompt": "How fixed do these roles feel?",
+              "options": [
+                "Usually consistent",
+                "Fluid and context-dependent",
+                "Different across activities or people",
+                "I don't think in roles",
+                "Not sure"
+              ],
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "DEEP_E",
+          "title": "Meaning and context",
+          "questions": [
+            {
+              "id": "DEEP_E1",
+              "type": "multi_select",
+              "prompt": "Which qualities might make an experience especially meaningful?",
+              "options": [
+                "Trust",
+                "Play",
+                "Sensation",
+                "Intensity",
+                "Care",
+                "Aesthetics",
+                "Ritual",
+                "Surprise",
+                "Connection",
+                "Control or surrender",
+                "Creativity",
+                "Other",
+                "Not sure"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_E2",
+              "type": "multi_select",
+              "prompt": "Which contexts might matter to your interests?",
+              "options": [
+                "Solo",
+                "With one partner",
+                "With multiple people",
+                "In a group or community setting",
+                "Private setting",
+                "Public-facing but consensual setting",
+                "Online",
+                "Depends on the activity",
+                "Prefer not to say"
+              ],
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "DEEP_F",
+          "title": "Experience and learning",
+          "questions": [
+            {
+              "id": "DEEP_F1",
+              "type": "single_select",
+              "prompt": "How would you describe your current experience overall?",
+              "options": [
+                "New / mostly learning",
+                "Some experience",
+                "Regular experience",
+                "Extensive experience",
+                "Varies a lot by activity",
+                "Prefer not to say"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_F2",
+              "type": "multi_select",
+              "prompt": "What would you like to learn or develop?",
+              "options": [
+                "Vocabulary",
+                "Communication",
+                "Negotiation",
+                "Practical skills",
+                "Understanding my interests",
+                "Community knowledge",
+                "Understanding risks and care",
+                "Nothing specific right now",
+                "Other"
+              ],
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "DEEP_G",
+          "title": "Communication and care",
+          "questions": [
+            {
+              "id": "DEEP_G1",
+              "type": "multi_select",
+              "prompt": "What helps you feel able to communicate clearly?",
+              "options": [
+                "Talking beforehand",
+                "Written discussion",
+                "Clear options and boundaries",
+                "Check-ins during an experience",
+                "Time to reflect",
+                "A trusted facilitator or educator",
+                "Other",
+                "Not sure"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_G2",
+              "type": "multi_select",
+              "prompt": "What forms of care or follow-up do you value?",
+              "options": [
+                "Physical comfort",
+                "Emotional check-in",
+                "Quiet time",
+                "Reassurance or affection",
+                "Practical support",
+                "Debrief later",
+                "Space and independence",
+                "Depends",
+                "Other"
+              ],
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "DEEP_H",
+          "title": "Private boundaries notebook",
+          "sensitivity": "highly_sensitive",
+          "private_by_default": true,
+          "questions": [
+            {
+              "id": "DEEP_H1",
+              "type": "multi_select",
+              "prompt": "Would you like to note any boundaries for your own reference?",
+              "options": [
+                "Hard limit",
+                "Conditional / context-dependent limit",
+                "Something I need to discuss first",
+                "Something I'm unsure about",
+                "Not now"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_H2",
+              "type": "optional_text",
+              "prompt": "Add a private note if useful. This is not consent for any activity and should not be shared automatically.",
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "DEEP_I",
+          "title": "Community and next steps",
+          "questions": [
+            {
+              "id": "DEEP_I1",
+              "type": "multi_select",
+              "prompt": "What kinds of community involvement interest you?",
+              "options": [
+                "Learning events",
+                "Workshops",
+                "Social events",
+                "Online community",
+                "Volunteering",
+                "Making friends",
+                "Finding mentors or educators",
+                "No community involvement",
+                "Not sure"
+              ],
+              "required": false
+            },
+            {
+              "id": "DEEP_I2",
+              "type": "single_select",
+              "prompt": "How would you like to use this map?",
+              "options": [
+                "Private reflection",
+                "Guide my learning",
+                "Prepare conversations",
+                "Revisit as my interests evolve",
+                "Maybe share selected parts later",
+                "Not sure"
+              ],
+              "required": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "response_record_example": {
+    "concept_id": "ACT_POWER_EXCHANGE",
+    "relationship_states": [
+      "curious",
+      "fantasy_only"
+    ],
+    "action_directions": [
+      "receiving"
+    ],
+    "time_context": "unspecified",
+    "experience": "not_answered",
+    "enjoyment": null,
+    "conditions": [],
+    "note": null,
+    "boundary": {
+      "status": "not_disclosed",
+      "details": null,
+      "shareable": false
+    },
+    "item_version": "1.0",
+    "updated_at": null
+  },
+  "graph": {
+    "node_types": [
+      "domain",
+      "concept"
+    ],
+    "edge_types": [
+      "belongs_to",
+      "related_to"
+    ],
+    "unanswered_state": "neutral",
+    "boundary_data_in_graph": false,
+    "global_score": false,
+    "node_size_semantics": "constant by node type; never desire intensity",
+    "concept_nodes_from": "concepts",
+    "domain_nodes_from": "domains",
+    "edges_from": "concepts[].domain_ids"
+  }
+}

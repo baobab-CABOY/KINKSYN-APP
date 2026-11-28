@@ -33,3 +33,14 @@ Known issues and ideas. Tag: **[bug]**, **[privacy]**, **[content]**, **[ux]**, 
 - Polycule maps (3+ profiles), E2EE negotiation rooms, printable protocol decks (Sanctuary Pass).
 - Snapshot diff view ("time-lapse" comparison) — snapshots are stored but not compared yet.
 - Export/import vault as a file (backup between devices).
+
+## Beta questionnaire + map (provisional)
+- [ ] [beta] Implement Snapshot as a separate flow using `js/data/questionnaire-beta-v1.json`.
+- [ ] [beta] Implement modular Deep Map; reuse Snapshot answers and allow skip/resume/edit.
+- [ ] [beta] Add versioned beta response storage without breaking legacy vaults.
+- [ ] [beta] Add faceted 11-domain / 36-concept node graph with multi-state visual encoding and accessible list alternative.
+- [ ] [privacy] Verify beta boundaries notebook is isolated from graph, exports, share links, Dyad and telemetry.
+- [ ] [privacy] Test encrypted and unencrypted vault migration and deletion/reset.
+- [ ] [test] Extend smoke tests with beta flow, content integrity and migration coverage.
+- [ ] [ux] Usability-test question wording, graph comprehension and mobile interaction.
+- [ ] [content] Review beta taxonomy and prompts with community members before production claims.

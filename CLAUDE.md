@@ -68,3 +68,38 @@ GitHub `baobab-CABOY/KINKSYN-APP` (public), branch `main`. **Live: https://baoba
 Also hosted (private) as a claude.ai artifact: https://claude.ai/artifact/XviqpoQ5B2m27467vGqSe5
 (slug `fa725d93-869f-400d-8ef1-6ba9de43c37a`). Republish with `publish_files` (slug + base_version) after changes.
 Artifact sandbox limits: PNG download is blocked and `#synapse=` URL links don't pass through; pasting a link into Dyad works.
+
+## Beta questionnaire + expanded node-map handoff (2026-11-27)
+
+**Owner's request:** implement the first beta from the versioned product package in this repo. The beta package is the implementation source of truth for new questionnaire content and its new faceted map model.
+
+Read before coding:
+- `docs/beta/BETA_IMPLEMENTATION_BRIEF.md`
+- `docs/beta/NEURAL_NODE_MAP_SPEC.md`
+- `js/data/questionnaire-beta-v1.json`
+- `docs/questionnaires/beta-v1.md`
+- `docs/ARCHITECTURE.md`
+
+### Critical integration guidance
+- The existing app is a functioning local-first product with an 18-node scored graph, quiz, encrypted vault, journal, PNG export and Dyad sharing. **Do not replace it wholesale or break existing saved vaults/share links.**
+- The new beta model has 11 domains and 36 concept nodes, with independent, multi-select relationship states. It is intentionally not a score or personality test.
+- Keep the legacy questionnaire/profile/graph working during beta integration. Prefer a separate beta entry point / profile namespace and a new graph mode, then consider migration only after explicit testing.
+- Do not feed new beta answers into the legacy `computeProfile()`, old 0–100 scores, archetype generation or Dyad matching. They are different data models.
+- Preserve stable IDs in the JSON. Treat it as data/configuration, not UI markup.
+- Add beta response records to the existing vault payload only through a versioned, backwards-compatible migration. Verify both encrypted and unencrypted vault hydration. Never silently discard old data.
+- New response states are multi-select and non-ordinal. "Unanswered" must remain distinct from "not interested". Contradictory combinations should be clarified, not auto-resolved.
+- The optional boundaries notebook is highly sensitive: private by default, excluded from graph node view models, partner sharing, share links, analytics, URLs and PNG exports unless the user explicitly chooses an appropriate export. Do not add boundary data to existing Dyad.
+- No global score, percentile, diagnosis, archetype, inferred consent or compatibility percentage for the beta model.
+- The neural map is a curated taxonomy graph, not a biological neural model. Edges mean taxonomy relationships only. Unanswered nodes are neutral. Node size does not encode desire intensity.
+- Use `escapeHtml()` for user-authored labels and notes. Keep keyboard and screen-reader list alternatives for the graph.
+- The app currently autosaves plaintext when no vault passphrase is configured and its share links are base64-readable. Be accurate about these limitations; do not promise encryption unless actually enabled and tested.
+
+### Required implementation workflow
+1. Inspect the current relevant modules and tests before edits.
+2. Implement an incremental beta path; preserve current landing/quiz/profile/Dyad behavior.
+3. Add tests for beta content integrity, multi-state response storage, unanswered-vs-not-interested, graph rendering, boundary isolation and vault migration.
+4. Run `python3 tests/smoke.py` and CI-equivalent checks.
+5. Update `CHANGELOG.md`, `docs/ARCHITECTURE.md`, `docs/BACKLOG.md`, generated questionnaire docs and this context map as the implementation evolves.
+6. Report changed files, tested flows, known gaps and the precise storage/privacy behavior.
+
+The beta package is a provisional product draft, not a psychometrically validated assessment. Build for learning and user feedback, not premature scoring or matching.

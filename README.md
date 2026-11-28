@@ -21,3 +21,12 @@ python3 tests/smoke.py
 See [`CLAUDE.md`](CLAUDE.md) for the file map, [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for data model and
 scoring, [`docs/BACKLOG.md`](docs/BACKLOG.md) for known issues, [`CHANGELOG.md`](CHANGELOG.md) for history.
 The original single-file prototype is in `archive/` for reference only (not loaded).
+
+## Beta questionnaire model (v1 draft)
+
+A second, non-scored questionnaire path is being prepared alongside the existing 18-node experience:
+- **Snapshot:** short introduction and broad domain exploration.
+- **Deep Map:** modular, optional concept-by-concept reflection.
+- **Faceted Neural Node Map:** 11 domains and 36 concepts, styled by explicit multi-select answers.
+
+The source content is in [`js/data/questionnaire-beta-v1.json`](js/data/questionnaire-beta-v1.json), with a readable version in [`docs/questionnaires/beta-v1.md`](docs/questionnaires/beta-v1.md). Implementation guidance and privacy constraints are in [`docs/beta/`](docs/beta/). This is a provisional self-reflection beta, not a validated test. The existing experience remains available while the new path is integrated.

@@ -24,3 +24,10 @@ Restructured from the single-file prototype (`kinksyn_v0.1`, kept in `archive/`)
 
 ## 0.1.0
 - Single-file prototype.
+
+## 0.3.0-beta — 2026-11-27
+- Added a separate beta questionnaire content package: KINKSYN Snapshot and modular Deep Map.
+- Added an 11-domain, 36-concept faceted taxonomy and a multi-state response schema.
+- Added Neural Node Map specification and implementation handoff for Claude.
+- The beta model is explicitly separate from legacy 18-node scores and Dyad matching; no validated assessment or compatibility claims.
+- No application behavior changed in this commit; this is content, documentation and implementation instruction only.
