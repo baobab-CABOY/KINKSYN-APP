@@ -7,7 +7,6 @@ Known issues and ideas. Tag: **[bug]**, **[privacy]**, **[content]**, **[ux]**, 
   (after every quiz/edit). Options: no autosave until the user opts in, or prompt for a passphrase on first save.
 - **[privacy]** Share links are plain base64; the charter says "zero-knowledge". Consider an optional link passphrase
   or wording that makes clear the link itself is readable.
-- **[privacy]** `wipeLocalVault` clears storage but keeps `app.profile` in memory; a later edit re-saves it.
 - **[content]** Resource lists (books, guides, videos) need fact-checking before release. Several titles/authors look
   invented or misattributed (e.g. some "Loving BDSM", "OMGYes", "Evie Lupine" items, "The Heart of Dominance").
 
@@ -34,13 +33,24 @@ Known issues and ideas. Tag: **[bug]**, **[privacy]**, **[content]**, **[ux]**, 
 - Snapshot diff view ("time-lapse" comparison) — snapshots are stored but not compared yet.
 - Export/import vault as a file (backup between devices).
 
-## Beta questionnaire + map (provisional)
-- [ ] [beta] Implement Snapshot as a separate flow using `js/data/questionnaire-beta-v1.json`.
-- [ ] [beta] Implement modular Deep Map; reuse Snapshot answers and allow skip/resume/edit.
-- [ ] [beta] Add versioned beta response storage without breaking legacy vaults.
-- [ ] [beta] Add faceted 11-domain / 36-concept node graph with multi-state visual encoding and accessible list alternative.
-- [ ] [privacy] Verify beta boundaries notebook is isolated from graph, exports, share links, Dyad and telemetry.
-- [ ] [privacy] Test encrypted and unencrypted vault migration and deletion/reset.
-- [ ] [test] Extend smoke tests with beta flow, content integrity and migration coverage.
-- [ ] [ux] Usability-test question wording, graph comprehension and mobile interaction.
+## Beta questionnaire + map (0.3.0-beta implemented)
+Done: Snapshot, modular Deep Map (skip/resume/edit, reuses Snapshot), versioned storage + migration (plain and
+encrypted), 11-domain / 36-concept SVG map with multi-state cues, list alternative, search, filters, collapse,
+private notebook isolation, export/delete, beta tests (unit + browser).
+
+Still open:
+- [ ] [content] **Provisional field options** in `js/beta/field-options.js` (time context, experience, enjoyment,
+  conditions, boundary statuses) were not defined in the content JSON — owner review needed; consider moving into the JSON.
+- [ ] [content] All 36 concept descriptions are "Neutral beta label. Expand with reviewed definition before production."
+- [ ] [content] Naming: beta content says "KINKSYN Snapshot / Deep Map", app is branded KINKSYS. Pick one.
+- [ ] [content] No curated `related_to` edges in the JSON yet (renderer supports `related_ids`).
+- [ ] [privacy] Consider requiring or strongly prompting a passphrase before writing the private notebook (today it
+  follows the vault setting and is plaintext without one; the UI says so).
+- [ ] [privacy] Map screenshots/exports: no beta map image export exists; if added, warn about sensitive content (spec §8).
+- [ ] [ux] Usability-test question wording, the multi-state legend, graph comprehension and phone interaction.
+- [ ] [ux] Snapshot SNAP_08 ("what next") is stored but doesn't route anywhere yet.
+- [ ] [ux] JSON import (restore an export) is not implemented.
+- [ ] [ux] Map: refit on window resize; labels at far zoom are hidden for unanswered concepts only.
+- [ ] [tech] Classic quiz while the vault is locked now shows "unlock to save" instead of overwriting the vault — the
+  result isn't saved until unlocked; consider prompting unlock before starting the classic quiz too.
 - [ ] [content] Review beta taxonomy and prompts with community members before production claims.

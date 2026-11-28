@@ -3,6 +3,10 @@ import { VAULT_STORAGE_KEY } from '../config.js';
 import { vaultCrypto } from '../core/crypto.js';
 import { DRIVERS } from '../data/nodes.js';
 import { escapeHtml } from '../core/utils.js';
+import { normalizeBeta, normalizeBetaPrivate, hasBetaData } from '../beta/store.js';
+
+// Vault payload schema. v1 (implicit) = legacy only; v2 adds `beta` + `betaPrivate` (see docs/ARCHITECTURE.md).
+export const VAULT_SCHEMA_VERSION = 2;
 
 export const vaultMethods = {
   checkLocalVaultOnBoot() {
@@ -25,6 +29,10 @@ export const vaultMethods = {
   },
 
   hydrateVaultData(data) {
+    // Keep fields this version doesn't know about, so a newer/older vault never loses data on re-save.
+    this.vaultExtras = Object.fromEntries(Object.entries(data || {}).filter(([k]) => !['profile', 'snapshots', 'journalEntries', 'savedPartners', 'beta', 'betaPrivate', 'schemaVersion', 'updatedAt'].includes(k)));
+    this.beta = normalizeBeta(data.beta);
+    this.betaPrivate = normalizeBetaPrivate(data.betaPrivate);
     if (data.profile) this.profile = data.profile;
     if (Array.isArray(data.snapshots)) this.snapshots = data.snapshots;
     if (Array.isArray(data.journalEntries)) this.journalEntries = data.journalEntries;
@@ -36,9 +44,38 @@ export const vaultMethods = {
   },
 
   async persistVault(customPassphrase = undefined) {
-    if (!this.profile) return;
+    // Never overwrite an encrypted vault that hasn't been unlocked in this session.
+    if (this.vaultStatus === 'locked') {
+      this.showToast('Vault is locked — unlock it to save changes');
+      return;
+    }
+    if (!this.profile && !hasBetaData(this.beta, this.betaPrivate)) return;
+    // Serialize + coalesce writes: encryption is async and slow, so overlapping saves could land out of
+    // order and leave an older state on disk. One write runs at a time; the last one reads the latest state.
+    if (customPassphrase !== undefined) this.persistPassOverride = customPassphrase;
+    if (this.persistPending) {
+      this.persistAgain = true;
+      return this.persistPending;
+    }
+    this.persistPending = (async () => {
+      do {
+        this.persistAgain = false;
+        const pass = this.persistPassOverride;
+        this.persistPassOverride = undefined;
+        await this.writeVaultNow(pass);
+      } while (this.persistAgain);
+      this.persistPending = null;
+    })();
+    return this.persistPending;
+  },
+
+  async writeVaultNow(customPassphrase = undefined) {
     const passToUse = customPassphrase !== undefined ? customPassphrase : this.vaultPassphrase;
     const payload = {
+      ...(this.vaultExtras || {}),
+      schemaVersion: VAULT_SCHEMA_VERSION,
+      beta: this.beta,
+      betaPrivate: this.betaPrivate,
       profile: this.profile,
       snapshots: this.snapshots,
       journalEntries: this.journalEntries,
@@ -74,7 +111,8 @@ export const vaultMethods = {
       this.vaultPassphrase = passphrase.trim();
       this.vaultStatus = 'unlocked';
       this.closeModal('vaultModal');
-      this.view = 'graph';
+      this.view = this.pendingViewAfterUnlock || (this.profile ? 'graph' : 'landing');
+      this.pendingViewAfterUnlock = null;
       this.render();
       this.showToast('Encrypted local vault unlocked');
       return true;
@@ -88,11 +126,19 @@ export const vaultMethods = {
     localStorage.removeItem(VAULT_STORAGE_KEY);
     this.vaultPassphrase = null;
     this.vaultStatus = 'empty';
+    // Clear in-memory copies too, so a later edit can't silently re-save wiped data.
+    this.profile = null;
+    this.partnerProfile = null;
+    this.beta = normalizeBeta(null);
+    this.betaPrivate = normalizeBetaPrivate(null);
+    this.vaultExtras = {};
     this.snapshots = [];
     this.journalEntries = [];
     this.savedPartners = [];
     this.closeModal('vaultModal');
-    this.renderHeader();
+    this.destroyGraph();
+    this.view = 'landing';
+    this.render();
     this.showToast('Local device vault wiped');
   },
 

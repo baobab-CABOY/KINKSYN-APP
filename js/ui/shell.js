@@ -139,6 +139,18 @@ export const shellMethods = {
       ? 'px-2.5 py-1.5 rounded-lg border border-amber-500/50 bg-amber-500/15 hover:bg-amber-500/25 text-[11px] font-mono text-amber-200 transition'
       : 'px-2.5 py-1.5 rounded-lg border border-teal-500/35 bg-teal-500/10 hover:bg-teal-500/20 text-[11px] font-mono text-teal-200 transition';
 
+    if (this.view === 'beta') {
+      header.innerHTML = `
+        <button type="button" onclick="app.openVaultModal()" class="${vaultBtnClass}">
+          ${vaultBadgeText}
+        </button>
+        <button type="button" onclick="app.goHome()" class="px-2.5 py-1.5 rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] text-[11px] font-mono text-zinc-300 transition">
+          Classic
+        </button>
+      `;
+      return;
+    }
+
     if (this.view === 'landing') {
       header.innerHTML = `
         <button type="button" onclick="app.openVaultModal()" class="${vaultBtnClass}">
@@ -188,6 +200,13 @@ export const shellMethods = {
       root.innerHTML = this.renderGraphView();
       this.renderInsightPanel();
       requestAnimationFrame(() => this.initGraphCanvas());
+    } else if (this.view === 'beta') {
+      if (!this.betaContent) {
+        this.openBeta(this.betaRoute || 'home');
+        return;
+      }
+      root.innerHTML = this.renderBetaView();
+      this.afterBetaRender();
     }
   },
 

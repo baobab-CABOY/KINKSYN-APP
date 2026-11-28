@@ -20,6 +20,16 @@ export const landingView = {
             </p>
           </div>
 
+          <!-- Beta entry (separate model: no scores, no matching) -->
+          <button type="button" onclick="app.openBeta('home')" class="w-full text-left glass-panel rounded-2xl p-4 sm:p-5 border border-indigo-400/40 hover:border-indigo-300/80 bg-indigo-500/[0.06] hover:bg-indigo-500/[0.12] transition space-y-1.5 shadow-lg">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-indigo-500/20 border border-indigo-400/40 text-indigo-200">New · Beta</span>
+              <span class="font-mono text-[11px] text-zinc-400">18+ · private · no scores</span>
+            </div>
+            <div class="text-base sm:text-lg font-semibold text-white flex items-center justify-between"><span>KINKSYN beta — Snapshot, Deep Map &amp; Neural Node Map</span><span class="text-indigo-300">→</span></div>
+            <p class="text-xs text-zinc-400 leading-relaxed">Describe how you relate to 11 areas and 36 concepts in your own terms — several answers at once, skip anything. Your map shows only what you said.</p>
+          </button>
+
           <!-- Two Questionnaire Choices Side-by-Side -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-left pt-1">
             <button type="button" onclick="app.startQuiz('quick')" class="group glass-panel rounded-2xl p-4 sm:p-5 border border-teal-500/30 hover:border-teal-400/70 bg-teal-500/[0.04] hover:bg-teal-500/[0.09] transition text-left space-y-2 shadow-lg">

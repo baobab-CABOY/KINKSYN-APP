@@ -22,11 +22,21 @@ See [`CLAUDE.md`](CLAUDE.md) for the file map, [`docs/ARCHITECTURE.md`](docs/ARC
 scoring, [`docs/BACKLOG.md`](docs/BACKLOG.md) for known issues, [`CHANGELOG.md`](CHANGELOG.md) for history.
 The original single-file prototype is in `archive/` for reference only (not loaded).
 
-## Beta questionnaire model (v1 draft)
+## Beta: Snapshot, Deep Map & Neural Node Map (0.3.0-beta)
 
-A second, non-scored questionnaire path is being prepared alongside the existing 18-node experience:
-- **Snapshot:** short introduction and broad domain exploration.
-- **Deep Map:** modular, optional concept-by-concept reflection.
-- **Faceted Neural Node Map:** 11 domains and 36 concepts, styled by explicit multi-select answers.
+Open the app and choose **New · Beta** on the landing page (18+ confirmation required).
+- **Snapshot** — about 5 minutes, every question optional; produces a map even from a few answers.
+- **Deep Map** — 9 optional modules in any order; answer only the concepts you want, with several states at once.
+- **Neural Node Map** — 11 areas and 36 concepts. Your own answers decorate the nodes; unanswered stays neutral grey.
+  Graph or list view, search, filters, keyboard and touch support.
+- **Your data** — where it is stored, encryption status, JSON export and delete.
 
-The source content is in [`js/data/questionnaire-beta-v1.json`](js/data/questionnaire-beta-v1.json), with a readable version in [`docs/questionnaires/beta-v1.md`](docs/questionnaires/beta-v1.md). Implementation guidance and privacy constraints are in [`docs/beta/`](docs/beta/). This is a provisional self-reflection beta, not a validated test. The existing experience remains available while the new path is integrated.
+What it is not: no score, type, diagnosis, compatibility rating, sharing or matching. Answers are not consent.
+Storage: local to the browser; encrypted only if you set a vault passphrase (otherwise plaintext localStorage).
+The optional private boundaries notebook is kept separate and never appears on the map, in share links, Dyad or the PNG.
+
+Content lives in [`js/data/questionnaire-beta-v1.json`](js/data/questionnaire-beta-v1.json) (readable copy:
+[`docs/questionnaires/beta-v1.md`](docs/questionnaires/beta-v1.md)); specs in [`docs/beta/`](docs/beta/).
+This is a provisional self-reflection beta, not a validated test.
+
+Tests: `node --test tests/*.test.mjs`, `python3 tests/smoke.py`, `python3 tests/beta_smoke.py`.

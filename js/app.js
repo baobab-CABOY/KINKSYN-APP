@@ -1,6 +1,13 @@
 // Central app object: state fields + feature method mixins.
 // Every method uses `this` (=== app). Inline onclick="app.x()" handlers rely on window.app (set in main.js).
 import { shellMethods } from './ui/shell.js';
+import { defaultBeta, defaultBetaPrivate } from './beta/store.js';
+import { betaFlowMethods } from './beta/flow.js';
+import { betaActionMethods } from './beta/actions.js';
+import { betaShellView } from './beta/views/shell-view.js';
+import { betaQuestionView } from './beta/views/question-view.js';
+import { betaConceptEditorView } from './beta/views/concept-editor.js';
+import { betaMapView } from './beta/views/map-view.js';
 import { quizMethods } from './features/quiz.js';
 import { profileMethods } from './features/profile.js';
 import { vaultMethods } from './features/vault.js';
@@ -32,6 +39,18 @@ export const app = {
   selectedNodeId: 'surrender',
   graphEngine: null,
   lastPosterDataUrl: null,
+  vaultExtras: {},
+  pendingViewAfterUnlock: null,
+  // Beta (separate model — never fed into legacy scoring, archetypes or Dyad)
+  beta: defaultBeta(),
+  betaPrivate: defaultBetaPrivate(), // boundaries: isolated from map, exports, share links, Dyad
+  betaContent: null,
+  betaRoute: 'home', // gate | home | snapshot | deep | map | data
+  betaDeepModule: null,
+  betaOpenConcept: null, // concept expanded in Deep Map B
+  betaNotebookOpen: false, // session-only reveal of the private notebook
+  betaMap: { selected: null, mode: 'graph', domains: null, states: null, showUnanswered: true, collapsed: [], search: '', editing: false, filtersOpen: false, view: null },
+  betaConfirmDelete: false,
 };
 
 Object.assign(
@@ -46,5 +65,11 @@ Object.assign(
   landingView,
   quizView,
   graphView,
-  insightPanelView
+  insightPanelView,
+  betaFlowMethods,
+  betaActionMethods,
+  betaShellView,
+  betaQuestionView,
+  betaConceptEditorView,
+  betaMapView
 );

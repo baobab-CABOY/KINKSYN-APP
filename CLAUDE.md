@@ -9,7 +9,7 @@ PNG one-pager, and partner "Dyad Synthesis" via share links. No backend, no buil
 - **Do not read whole files you don't need.** Use the map below, then `grep -n` for the method and
   `Read` with `offset`/`limit`. Most changes touch 1–2 files.
 - `js/data/*` is pure content (long). Only open it to edit content; grep for an `id:` to jump.
-- After a change: `python3 tests/smoke.py` (headless, ~10 s). Extend it when adding a flow.
+- After a change: `python3 tests/smoke.py` + `python3 tests/beta_smoke.py` + `node --test tests/*.test.mjs`. Extend them when adding a flow.
 - Log user-visible changes in `CHANGELOG.md`; move done items out of `docs/BACKLOG.md`.
 - Deeper detail (profile shape, scoring maths, share format) is in `docs/ARCHITECTURE.md`. Read only when touching those.
 
@@ -53,6 +53,23 @@ PNG one-pager, and partner "Dyad Synthesis" via share links. No backend, no buil
 | `js/graph/engine.js` (527) | `class NeuralGraphEngine`: layout, physics float, pan/zoom/drag, hitTest, draw (edges, pulses, glows, partner rings, "mutual gold") |
 | `tests/smoke.py` | Playwright smoke test of every main flow |
 | `tools/gen-questionnaires.mjs` | Writes `docs/questionnaires/quick-pulse.md` + `full-deep-dive.md` from the data (generated, don't hand-edit) |
+| **Beta (separate model)** | Everything below is `js/beta/`. Never feeds legacy `computeProfile`, archetypes or Dyad. |
+| `js/data/questionnaire-beta-v1.json` (963) | **Owner's content source of truth**: 11 domains, 36 concepts, 12 states, 7 directions, Snapshot (9 q), Deep Map (9 modules). Don't edit for UI reasons |
+| `js/beta/content.js` (82) | `loadBetaContent` (fetch+validate+index, cached), `validateBetaContent`, `indexBetaContent`, `questionOptions`, `deepQuestionById` |
+| `js/beta/field-options.js` (91) | PROVISIONAL option lists (time/experience/enjoyment/conditions/boundary status), `DOMAIN_COLORS`, `STATE_CUES`, conflict rules |
+| `js/beta/store.js` (168) | Pure: `defaultBeta/defaultBetaPrivate`, `normalizeBeta*` (vault migration), `toggleListValue`, `setRecordField`, `clearRecord`, `toggleDomainState`, `findStateConflicts`, `hasBetaData`, `buildBetaExport` |
+| `js/beta/model.js` (136) | Pure: `buildBetaGraphModel(content, beta)` (no private arg by design), `visibleNodeIds`, `searchMatches`, `computeLayout` (deterministic force pass) |
+| `js/beta/map-svg.js` (94) | SVG string builders: `renderNodeSvg` (state cues: rings/halo/glyphs/markers), `renderEdgesSvg`, `legendIcon` |
+| `js/beta/map-controller.js` (105) | Pan/zoom/pinch on `#betaSvg`; view in `app.betaMap.view`; `fitView`, `zoomAt`, `applyView` (label scaling `--ls`) |
+| `js/beta/flow.js` (159) | Mixin `betaFlowMethods`: `openBeta` (locked-vault + 18+ gate), `betaGo`, `renderBeta`, `betaSave`, Snapshot nav, generic answer handlers (`betaToggleOption/PickOption/SetText`), notebook open |
+| `js/beta/actions.js` (180) | Mixin `betaActionMethods`: concept edits, private boundaries, map filters/selection, export, `betaDeleteAll` |
+| `js/beta/views/shell-view.js` (136) | `renderBetaView` dispatcher, nav, gate, beta home, "Your data" page, `betaStorageText` (honest storage wording) |
+| `js/beta/views/question-view.js` (213) | Question renderer, Snapshot steps + review, Deep Map hub/modules, concept inventory (module B), notebook gate (module H) |
+| `js/beta/views/concept-editor.js` | `renderBetaConceptEditor(cid, {context})` — `context:'map'` shows no boundary controls |
+| `js/beta/views/map-view.js` (212) | Map page: toolbar, filters, SVG, list alternative, detail panel, legend, `betaRefreshMapParts`, `betaZoom` |
+| `js/beta/views/ui-kit.js` | `chip` (aria-pressed), `button`, `card`, `sectionTitle`, `esc` |
+| `tests/beta.test.mjs` | Node unit tests (content integrity, store, migration, model, isolation, export) — `node --test tests/*.test.mjs` |
+| `tests/beta_smoke.py` | Playwright beta flows, privacy isolation, vault migration (plain + encrypted), mobile tap — 45 checks |
 
 ## Recipes
 - **Add/edit a question** → `js/data/questions.js` (`weights` keys must be node ids). Quick track? add id to `QUICK_PULSE_IDS`. Update demo answers in `quiz.js` if needed. Then `node tools/gen-questionnaires.mjs` (CI fails if `docs/questionnaires/` is stale).
@@ -62,6 +79,9 @@ PNG one-pager, and partner "Dyad Synthesis" via share links. No backend, no buil
 - **New persisted field** → add to `app.js` state, `vault.js persistVault` payload + `hydrateVaultData`.
 - **New modal** → static markup in `index.html`, open/close via `classList` hidden/flex, close with `app.closeModal(id)`.
 - **New feature module** → `js/features/x.js` exporting `xMethods = {…}`, import + add to `Object.assign` in `app.js`, add a row above.
+- **Beta content change** → edit `js/data/questionnaire-beta-v1.json` (keep ids stable), run `node --test tests/*.test.mjs`. New question `type`? add a branch in `question-view.js renderBetaQuestion`.
+- **Beta map look** → cues in `map-svg.js` + legend text in `field-options.js STATE_CUES`; layout in `model.js computeLayout`.
+- **Beta privacy rule** → anything from `app.betaPrivate` must never reach `buildBetaGraphModel`, map/list DOM, share links, PNG or Dyad. `beta_smoke.py` checks this with marker strings.
 
 ## Repo
 GitHub `baobab-CABOY/KINKSYN-APP` (public), branch `main`. **Live: https://baobab-caboy.github.io/KINKSYN-APP/** (GitHub Pages from `main` root, auto-deploys on push). CI: `.github/workflows/ci.yml` (syntax check + smoke test).
@@ -69,7 +89,9 @@ Also hosted (private) as a claude.ai artifact: https://claude.ai/artifact/Xviqpo
 (slug `fa725d93-869f-400d-8ef1-6ba9de43c37a`). Republish with `publish_files` (slug + base_version) after changes.
 Artifact sandbox limits: PNG download is blocked and `#synapse=` URL links don't pass through; pasting a link into Dyad works.
 
-## Beta questionnaire + expanded node-map handoff (2026-11-27)
+## Beta questionnaire + expanded node-map handoff (2026-11-27) — **implemented in 0.3.0-beta**
+
+Status: Snapshot, Deep Map, Neural Node Map, private notebook, export/delete and vault v2 migration are live behind the landing-page "Beta" card (`app.view = 'beta'`, sub-route `app.betaRoute`). Details: `docs/ARCHITECTURE.md` → "Beta implementation". Open items: `docs/BACKLOG.md` → Beta.
 
 **Owner's request:** implement the first beta from the versioned product package in this repo. The beta package is the implementation source of truth for new questionnaire content and its new faceted map model.
 

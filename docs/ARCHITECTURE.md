@@ -94,3 +94,60 @@ Suggested concept response record:
 ```
 
 Important: unanswered is not the same as `not_interested`; relationship states are not an ordinal scale. Boundary details must be isolated from graph nodes, exports and Dyad/share data. See `docs/beta/NEURAL_NODE_MAP_SPEC.md` for graph semantics and `docs/beta/BETA_IMPLEMENTATION_BRIEF.md` for acceptance criteria.
+
+## Beta implementation (0.3.0-beta)
+
+### Entry and routing
+Landing "Beta" card → `app.openBeta(route)`. If the vault is **locked** it opens the unlock modal instead (and
+`pendingViewAfterUnlock = 'beta'`), because saving would otherwise overwrite the encrypted vault. Content is fetched once
+(`loadBetaContent`, validated + indexed). `app.view = 'beta'`, sub-route `app.betaRoute` ∈
+`gate | home | snapshot | deep | map | data`. The 18+ gate (`beta.ageConfirmedAt`) is required before any route.
+`renderBeta()` re-renders the view on every answer, keeping scroll and map pan/zoom; the enter animation only plays
+when the screen changes.
+
+### Stored data (vault payload `schemaVersion: 2`)
+```js
+{
+  schemaVersion: 2,
+  profile, snapshots, journalEntries, savedPartners,   // legacy, unchanged
+  ...unknownFields,                                     // kept verbatim (vaultExtras) on every re-save
+  beta: {
+    schema_version: 1, content_version: '1.0.0', ageConfirmedAt,
+    snapshot: { answers: { SNAP_01: { values: [...] }, SNAP_02: { value }, SNAP_03: { value, text } }, step, completedAt },
+    domainResponses: { DOM_X: { relationship_states: [...], updated_at } },   // from SNAP_05 / Deep Map B
+    deep: { answers: { DEEP_A1: { values }, ... }, lastModule },
+    responses: { ACT_X: <concept record, see above> },                           // only non-empty records
+    updatedAt
+  },
+  betaPrivate: {                                        // HIGHLY SENSITIVE — isolated
+    notebook: { DEEP_H1: { values }, DEEP_H2: { text } },
+    conceptBoundaries: { ACT_X: { status, details, shareable: false, updated_at } }
+  }
+}
+```
+- Inline-option answers store the option **text** (stable per content version); `source` questions store ids.
+- A concept record with nothing left in it is deleted → the node is "unanswered" again. `not_interested` is a state.
+- `record.boundary` is always the non-disclosing stub; real boundary data is only in `betaPrivate.conceptBoundaries`.
+- Migration: `hydrateVaultData` runs `normalizeBeta/normalizeBetaPrivate` (defaults for pre-beta vaults, unknown
+  fields kept). Tested for unencrypted and encrypted legacy vaults.
+- `persistVault` now: refuses while locked; saves when there is a legacy profile **or** beta data; serialises and
+  coalesces writes (async encryption could otherwise land out of order).
+- Without a passphrase everything (legacy and beta, including the private notebook) is plaintext in localStorage. The
+  UI says so on the gate, the notebook gate and the "Your data" page.
+
+### Privacy isolation (enforced by structure + tests)
+- `buildBetaGraphModel(content, beta)` has no private argument; node view models exclude notes and boundaries.
+- The map-context editor renders no boundary controls; conflict hints involving boundaries only show in Deep Map B.
+- Beta data is not read by `encodeProfile`, Dyad, PNG export or `computeProfile`.
+- Export (`buildBetaExport`) leaves `betaPrivate` out unless the user ticks "include".
+- `betaDeleteAll` clears beta + betaPrivate; keeps legacy data (or removes the key if nothing legacy remains).
+- `wipeLocalVault` now also clears in-memory profile/beta so nothing is re-saved after a wipe.
+
+### Map rendering
+SVG (not canvas) so nodes are focusable (`tabindex`, `role=button`, `aria-label` with states) and testable.
+Domains: fixed ring (R=420). Concepts: deterministic force pass (springs to their domains, pairwise repulsion).
+Node radius is fixed by type (domain 24 / concept 11). Each state adds its own cue (see `STATE_CUES`), so several
+states combine and no state relies on colour alone. Edges are uniform (`belongs_to`; `related_to` would render dashed
+if the content ever adds `related_ids`). Filters (areas, states, unanswered, collapse, search) only change what is
+drawn. The map starts filtered to the areas picked in Snapshot SNAP_04 ("Show all areas" resets). A list view
+carries the same information grouped by area.

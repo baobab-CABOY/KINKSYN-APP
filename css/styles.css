@@ -68,3 +68,9 @@ html, body {
 #neuralCanvas:active {
   cursor: grabbing;
 }
+
+/* Beta node map */
+#betaSvg.beta-far .beta-lbl-minor { display: none; }
+#betaSvg .beta-node { cursor: pointer; outline: none; }
+#betaSvg .beta-focus { display: none; }
+#betaSvg .beta-node:focus-visible .beta-focus { display: inline; }
